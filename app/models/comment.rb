@@ -1,7 +1,8 @@
 class Comment < ApplicationRecord
-  def counter
-    post = Post.find_by(id: post_id)
-    count = Comment.where(post_id: post.id).count
-    post.update(comments_counter: count)
+  belongs_to :author, class_name: 'User', foreign_key: 'users_id'
+  belongs_to :post
+
+  def update_comments_counter
+    post.increment!(:Comments_Counter)
   end
 end

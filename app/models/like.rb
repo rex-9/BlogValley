@@ -1,7 +1,8 @@
 class Like < ApplicationRecord
-  def counter
-    post = Post.find_by(id: post_id)
-    count = Like.where(post_id: post.id).count
-    post.update(likes_counter: count)
+  belongs_to :author, class_name: 'User', foreign_key: 'users_id'
+  belongs_to :post
+
+  def update_likes_counter
+    post.increment!(:Likes_Counter)
   end
 end
