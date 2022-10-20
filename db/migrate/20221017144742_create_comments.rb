@@ -4,7 +4,7 @@ class CreateComments < ActiveRecord::Migration[7.0]
       t.references :user, null: false, foriegn_key: true, index:true
       t.references :post, null: false, foriegn_key: true, index:true
 
-      t.text :text
+      t.text :text, null: false
 
       t.timestamps
     end
