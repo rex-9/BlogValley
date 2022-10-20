@@ -1,7 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  subject { Post.new(user_id: 1, title: 'Elden Ring', text: 'Thy Strength befits the Crown', comments_counter: 3, likes_counter: 2) }
+  subject do
+    Post.new(user_id: 1, title: 'Elden Ring', text: 'Thy Strength befits the Crown', comments_counter: 3,
+             likes_counter: 2)
+  end
 
   before { subject.save }
 
