@@ -1,7 +1,9 @@
 class Post < ApplicationRecord
-  belongs_to :author, class_name: 'User', foreign_key: 'user_id'
+  belongs_to :user
   has_many :likes
   has_many :comments
+
+  after_save :update_posts_counter
 
   validates :title, presence: true,
                     length: { in: 3...250, too_short: 'Title must not be shorter than 3 characters.',
@@ -19,6 +21,6 @@ class Post < ApplicationRecord
   private
 
   def update_posts_counter
-    author.increment!(:posts_counter)
+    user.increment!(:posts_counter)
   end
 end

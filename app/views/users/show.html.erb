@@ -1,9 +1,50 @@
-<%= render @user %>
-<% if @user.bio.present? %>
-	<div class="mt-5 notification">
-	  <h5 class="title is-6">Bio</h5>
-	  <p class="is-6"><%= @user.bio %></p>
-	</div>
-<% end %>
-<%= render partial: "posts/post", collection: @posts %>
-<%= link_to "See all post", user_posts_path(@user.id), class: "button is-link is-small" %>
+<div class="show-user">
+  <h1>Show User Data</h1>
+  <ul>
+    <li>
+      <div class="card">
+        <div>
+          <%= image_tag ("#{@user.photo}") %>
+        </div>
+        <h2>
+          <%= @user.name %>
+        </h2>
+        <p>Number of posts: <%= @user.posts_counter %></p>
+      </div>
+    </li>
+  </ul>
+  <div>
+    <h3>Bio</h3>
+    <p>
+      <%= @user.bio %>
+    </p>
+  </div>
+  <div>
+    <h2>Posts:</h2>
+    <ul>
+      <% @user.three_recent_posts.each do |post| %>
+        <li>
+          <div class='post-card'>
+            <div>
+              <h3>
+                <%= post.title %>
+              </h3>
+            </div>
+            <p>
+              <%= post.text %>
+            </p>
+            <div>
+              <span>Comments:
+                <%= post.comments_counter %>
+              </span>
+              <span> Likes:
+                <%= post.likes_counter %>
+              </span>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <%= link_to 'See all posts', user_posts_path(@user.id) , class:'btn'%>
+</div>
