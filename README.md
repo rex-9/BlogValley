@@ -1,6 +1,6 @@
 # Blog Valley
 
-- A lot of users can
+    A lot of users can
 - Register and Log in to the Blog Valley account
 - Post their Blogs
 - Like any blog in the valley
@@ -41,7 +41,12 @@ bundle install
 ```bash command
 rails db:migrate
 ```
-#### 5. Run the server:
+#### 5. Seed the dummy data:
+
+```bash command
+rails db:seed
+```
+#### 6. Run the server:
 
 ```bash command
 rails s

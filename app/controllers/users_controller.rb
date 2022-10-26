@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
-  def index; end
+  def index
+    @users = User.all # eager load the posts
+  end
 
-  def show; end
+  def show
+    @user = User.find(params[:id]) # includes(:posts) is needed to eager load the posts
+  end
 end
