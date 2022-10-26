@@ -14,7 +14,7 @@
   </div>
 </div>
 
-<%= form_with url: "/users/#{@post.user_id}/posts/#{@post.id}/like_post", scope: :like do |f| %>
+<%= form_with url: "/users/#{@post.user_id}/posts/#{@post.id}/like_post" do |f| %>
   <%= f.submit "Like" %>
 <% end %>
 
