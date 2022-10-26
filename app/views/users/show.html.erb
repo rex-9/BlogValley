@@ -1,50 +1,26 @@
-<div class="show-user">
-  <h1>Show User Data</h1>
-  <ul>
-    <li>
-      <div class="card">
-        <div>
-          <%= image_tag ("#{@user.photo}") %>
-        </div>
-        <h2>
-          <%= @user.name %>
-        </h2>
-        <p>Number of posts: <%= @user.posts_counter %></p>
-      </div>
-    </li>
-  </ul>
-  <div>
-    <h3>Bio</h3>
-    <p>
-      <%= @user.bio %>
-    </p>
+<div class="flex-center">
+  <h1 class="mb-3">Show User Data</h1>
+  <div class="card">
+    <%= image_tag ("#{@user.photo}") %>
+    <h2><%= @user.name %></h2>
+    <p>Number of posts: <%= @user.posts_counter %></p>
   </div>
+  <h3>Bio</h3>
+  <%= @user.bio %>
   <div>
     <h2>Posts:</h2>
     <ul>
       <% @user.three_recent_posts.each do |post| %>
-        <li>
-          <div class='post-card'>
-            <div>
-              <h3>
-                <%= post.title %>
-              </h3>
-            </div>
-            <p>
-              <%= post.text %>
-            </p>
-            <div>
-              <span>Comments:
-                <%= post.comments_counter %>
-              </span>
-              <span> Likes:
-                <%= post.likes_counter %>
-              </span>
-            </div>
+        <li class='post-card'>
+          <h3><%= post.title %></h3>
+          <p><%= post.text %></p>
+          <div>
+            <span>Comments: <%= post.comments_counter %></span>
+            <span>Likes: <%= post.likes_counter %></span>
           </div>
         </li>
       <% end %>
     </ul>
   </div>
-  <%= link_to 'See all posts', user_posts_path(@user.id) , class:'btn'%>
+  <%= link_to 'See more', user_posts_path(@user.id) , class:'btn'%>
 </div>
