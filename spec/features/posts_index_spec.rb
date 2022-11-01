@@ -46,7 +46,10 @@ RSpec.feature 'Posts are indexed', type: :feature do
 
   # end
 
-  # scenario 'redirects to the post show page' do
-
-  # end
+  scenario 'redirects to the post show page' do
+    @user.posts.each do |post|
+      click_on post.title
+      expect(current_path).to eq user_post_path(user_id: post.user.id, id: post.id)
+    end
+  end
 end
