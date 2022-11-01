@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.feature 'User Show Page', type: :feature do
   background do
     @user = FactoryBot.create(:user, name: 'John Doe')
+    @post = FactoryBot.create(:post, user_id: 1)
     visit user_path(@user.id)
   end
 
@@ -32,13 +33,15 @@ RSpec.feature 'User Show Page', type: :feature do
     expect(find_link("See more")).to be_visible
   end
 
-  # scenario 'redirects to the post show page' do
-  #   click_link @user.id.to_s
-  #   expect(current_path).to eq user_path(@user.id)
-  # end
+  scenario 'redirects to the post show page' do
+    @user.posts.each do |post|
+      click_on post.text
+      expect(current_path).to eq user_post_path(user_id: post.user.id, id: post.id)
+    end
+  end
 
-  # scenario 'redirects to the posts index page' do
-  #   click_link @user.id.to_s
-  #   expect(current_path).to eq user_path(@user.id)
-  # end
+  scenario 'redirects to the posts index page' do
+    click_on "See more"
+    expect(current_path).to eq user_posts_path(@user.id)
+  end
 end
