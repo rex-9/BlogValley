@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   def new
     user = User.find(params[:user_id])
     post = user.posts.new
-    render :new, locals: { post: post }
+    render :new, locals: { post: }
   end
 
   def create

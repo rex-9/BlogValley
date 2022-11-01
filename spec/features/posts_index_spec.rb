@@ -1,8 +1,10 @@
 require 'rails_helper'
 
+# rubocop:disable Metrics/BlockLength
+
 RSpec.feature 'Posts are indexed', type: :feature do
   background do
-    @user = User.create(name: 'Rex', photo: 'https://images.unsplash.com/photo-1649194791397-90dddfe2c1c5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80', bio: 'Spiritual Full Stack Developer')
+    @user = FactoryBot.create(:user)
     @post = Post.create(title: 'Title 1', text: 'Text 1', user_id: @user.id)
     @comment = Comment.create(text: 'BlaBlaBla', user_id: @user.id, post_id: @post.id)
     visit user_posts_path(user_id: @post.user.id)
@@ -42,10 +44,6 @@ RSpec.feature 'Posts are indexed', type: :feature do
     expect(page).to have_content("Likes: #{@user.posts[0].likes_counter}")
   end
 
-  # scenario 'can see the pagination' do
-
-  # end
-
   scenario 'redirects to the post show page' do
     @user.posts.each do |post|
       click_on post.title
@@ -53,3 +51,5 @@ RSpec.feature 'Posts are indexed', type: :feature do
     end
   end
 end
+
+# rubocop:enable Metrics/BlockLength

@@ -1,5 +1,7 @@
 require 'rails_helper'
 
+# rubocop:disable Metrics/BlockLength
+
 RSpec.feature 'User Show Page', type: :feature do
   background do
     @user = FactoryBot.create(:user, name: 'John Doe')
@@ -30,7 +32,7 @@ RSpec.feature 'User Show Page', type: :feature do
   end
 
   scenario 'can see See More Button to see all posts of the user' do
-    expect(find_link("See more")).to be_visible
+    expect(find_link('See more')).to be_visible
   end
 
   scenario 'redirects to the post show page' do
@@ -41,7 +43,9 @@ RSpec.feature 'User Show Page', type: :feature do
   end
 
   scenario 'redirects to the posts index page' do
-    click_on "See more"
+    click_on 'See more'
     expect(current_path).to eq user_posts_path(@user.id)
   end
 end
+
+# rubocop:enable Metrics/BlockLength
