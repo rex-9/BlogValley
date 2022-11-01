@@ -13,7 +13,7 @@ RSpec.describe 'Posts', type: :request do
     end
 
     it 'should include correct placeholder text' do
-      expect(response.body).to include('Here is a list of posts for a given user')
+      expect(response.body).to include('Posts')
     end
   end
 
@@ -29,7 +29,7 @@ RSpec.describe 'Posts', type: :request do
     end
 
     it 'return correct placeholder text' do
-      expect(response.body).to include('Here is a detailed page of a post')
+      expect(response.body).to include('Comment here')
     end
   end
 end

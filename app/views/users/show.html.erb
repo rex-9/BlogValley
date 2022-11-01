@@ -10,7 +10,7 @@
   <div>
     <h2>Posts:</h2>
     <ul>
-      <% @user.three_recent_posts.each do |post| %>
+      <% @user.recent_posts.each do |post| %>
         <li class='post-card'>
           <h3><%= post.title %></h3>
           <p><%= post.text %></p>
