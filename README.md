@@ -1,4 +1,4 @@
-# Blog Valley
+# BlogValley
 
     A lot of users can
 - Register and Log in to the Blog Valley account
