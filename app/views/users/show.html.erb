@@ -1,7 +1,7 @@
 <div class="flex-center">
   <h1 class="mb-3">Show User Data</h1>
   <div class="card">
-    <%= image_tag ("#{@user.photo}") %>
+    <%= image_tag ("#{@user.photo}"), alt: "profile picture" %>
     <h2><%= @user.name %></h2>
     <p>Number of posts: <%= @user.posts_counter %></p>
   </div>
@@ -22,5 +22,5 @@
       <% end %>
     </ul>
   </div>
-  <%= link_to 'See more', user_posts_path(@user.id) , class:'btn'%>
+  <%= link_to 'See more', user_posts_path(@user.id), class:'btn'%>
 </div>
