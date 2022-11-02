@@ -1,28 +1,9 @@
-<div class="flex-center">
-  <h1 class="mb-3">Show User Data</h1>
-  <div class="card">
-    <%= image_tag ("#{@user.photo}"), alt: "profile picture" %>
-    <h2><%= @user.name %></h2>
-    <p>Number of posts: <%= @user.posts_counter %></p>
-  </div>
-  <h3>Bio</h3>
-  <%= @user.bio %>
-  <div>
-    <h2>Posts:</h2>
-    <ul>
-      <% @user.recent_posts.each do |post| %>
-        <%= link_to user_post_path(user_id: @user.id, post_id: post.id) do %>
-          <li class='post-card'>
-            <h3><%= post.title %></h3>
-            <p><%= post.text %></p>
-            <div>
-              <span>Comments: <%= post.comments_counter %></span>
-              <span>Likes: <%= post.likes_counter %></span>
-            </div>
-          </li>
-        <% end %>
-      <% end %>
-    </ul>
-  </div>
-  <%= link_to 'See more', user_posts_path(@user.id), class:'btn'%>
-</div>
+<%= render @user %>
+<% if @user.bio.present? %>
+	<div class="mt-5 notification">
+	  <h5 class="title is-6">Bio</h5>
+	  <p class="is-6"><%= @user.bio %></p>
+	</div>
+<% end %>
+<%= render partial: "posts/post", collection: @posts %>
+<%= link_to "See all post", user_posts_path(@user.id), class: "button is-link is-small" %>

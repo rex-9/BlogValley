@@ -1,27 +1,16 @@
-<h1> Posts Show Page</h1>
-<div class='post-card'>
-  <h3><%= @post.title %></h3>
-  <p><%= @post.text %></p>
-  <p><%= @post.user.name %></p>
-  <div>
-    <span>Comments: <%= @post.comments_counter %></span>
-    <span>Likes: <%= @post.likes_counter %></span>
+<div class="content">
+  <div class="media-content">
+    <div class="content">
+      <strong><%= @user.name %></strong>
+      <p class="is-size-7 is-italic"><%= t('posted_on', date: @post.created_at.to_s(:nice_date)) %></p>
+      <p class="is-size-7"><%= t('comments_counter', count: @post.comments_counter) %>, <%= t('likes_counter', count: @post.likes_counter) %></p>
+      <%= render 'header' %>
+    </div>
   </div>
-  <div class="comment">
-    <% @post.comments.each do |comment| %>
-      <p><%= comment.text %></p>
-    <% end %>
+  <div class="content">
+    <h1><%= @post.title %></h1>
+    <p><%= @post.text %></p>
   </div>
 </div>
-<%= form_with url: "/users/#{@post.user_id}/posts/#{@post.id}/like_post" do |f| %>
-  <%= f.submit "Like" %>
-<% end %>
-<h1 class="comment-here">Comment here....</h1>
-<%= form_with url: new_comment_user_post_path do |form| %>
-  <div class="mb-3">
-    <%= form.text_area :text, class: "form-control" %>
-  </div>
-  <div class="mb-3">
-    <%= form.submit class: "btn btn-primary" %>
-  </div>
-<% end %>
+<%= render partial: "new_comment", post: @post %>
+<%= render partial: "shared/comment", collection: @comments %>

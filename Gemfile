@@ -44,8 +44,12 @@ gem 'bootsnap', require: false
 
 gem 'ffi', github: 'ffi/ffi', submodules: true
 
+gem 'devise'
+
+gem "cancan"
+
 # Use Sass to process CSS
-# gem "sassc-rails"
+gem "sassc-rails"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -57,6 +61,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'rspec-rails'
 
+  gem 'bullet'
   gem 'database_cleaner-active_record'
   gem 'factory_bot_rails'
   gem 'faker'

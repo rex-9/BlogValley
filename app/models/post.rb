@@ -3,8 +3,6 @@ class Post < ApplicationRecord
   has_many :likes
   has_many :comments
 
-  after_save :update_posts_counter
-
   validates :title, presence: true,
                     length: { in: 3...250, too_short: 'Title must not be shorter than 3 characters.',
                               too_long: 'Title must not exceed 250 characters.' }
@@ -15,12 +13,14 @@ class Post < ApplicationRecord
   after_save :update_posts_counter
 
   def recent_comments(limit = 5)
-    comments.limit(limit)
+    comments.last(limit)
   end
 
-  private
+  def liked?(user_id)
+    likes.where(user_id: user_id).exists?
+  end
 
-  def update_posts_counter
-    user.increment!(:posts_counter)
+  def update_count(count)
+    user.update(posts_counter: count)
   end
 end

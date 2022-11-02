@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-  subject { FactoryBot.build :comment }
+  describe '#update_counter' do
+    subject { FactoryBot.build :comment }
 
-  before { subject.save }
-
-  it 'text should be present' do
-    subject.text = nil
-    expect(subject).to_not be_valid
+    it 'should update the post comments counter' do
+      subject.update_count(2)
+      expect(subject.post.comments_counter).to be(2)
+    end
   end
 end

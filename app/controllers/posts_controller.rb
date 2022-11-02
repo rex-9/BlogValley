@@ -1,38 +1,63 @@
 class PostsController < ApplicationController
+  # load_and_authorize_resource
+  # skip_authorize_resource only: [:all_posts]
+
   def index
     @user = User.find(params[:user_id])
-    @posts = @user.posts.includes(:comments)
+    @posts = @user.posts
   end
 
   def show
-    @post = User.find(params[:user_id]).posts.find(params[:id])
+    @user = User.find(params[:user_id])
+    @post = @user.posts.includes(:comments).find(params[:id])
+    @comments = @post.comments.all.order('created_at')
+    @liked = @post.liked? current_user.id
   end
 
   def new
-    user = User.find(params[:user_id])
-    post = user.posts.new
-    render :new, locals: { post: }
+    @post = Post.new
+  end
+
+  def edit
+    @post = Post.find params[:id]
+  end
+
+  def update
+    @post = Post.find params[:id]
+
+    if @post.update post_params
+      format.html { redirect_to user_post_path(@post.user.id, @post.id), notice: 'Post edited successfully!' }
+    else
+      render :new
+    end
   end
 
   def create
-    user = User.find(params[:user_id])
-    add_post = user.posts.new(post_params)
-    respond_to do |format|
-      format.html do
-        if add_post.save
-          flash[:success] = 'Post created successfully'
-          redirect_to user_posts_url
-        else
-          flash.now[:error] = 'Error: Post could not be created'
-          render :new, locals: { post: add_post }
-        end
-      end
+    @post = current_user.posts.new(post_params)
+
+    if @post.save
+      redirect_to user_post_path(@post.user.id, @post.id), notice: 'Post was successfully created.'
+    else
+      flash[:alert] = 'Post was not created.'
+      render :new
     end
+  end
+
+  def destroy
+    post = Post.find params[:id]
+    user = post.user
+
+    if post.destroy
+      flash[:notice] = 'Post has been deleted!'
+    else
+      flash[:alert] = 'Failed to delete post!'
+    end
+    redirect_to user_path(user.id)
   end
 
   private
 
   def post_params
-    params.require(:new_post).permit(:title, :text)
+    params.require(:post).permit(:title, :text)
   end
 end

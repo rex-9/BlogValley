@@ -1,59 +1,49 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  describe 'Validation' do
-    subject do
-      FactoryBot.build :post
-    end
+  describe 'validations' do
+    subject { FactoryBot.build :post }
 
-    before { subject.save }
-
-    it 'title should be present' do
+    it 'should have a title' do
       subject.title = nil
       expect(subject).to_not be_valid
     end
 
-    it 'text should be present' do
-      subject.text = nil
+    it 'max title length should be 250 chars' do
+      subject.title = 'RoR' * 250
       expect(subject).to_not be_valid
     end
 
-    it 'comments_counter should be present' do
-      subject.comments_counter = nil
+    it 'should not be blank title' do
+      subject.title = ' '
       expect(subject).to_not be_valid
     end
 
-    it 'comments_counter should not be string' do
-      subject.comments_counter = 'abc'
-      expect(subject).to_not be_valid
-    end
-
-    it 'comments_counter should not be negative' do
+    it 'should have a postive integer comments counter' do
       subject.comments_counter = -1
       expect(subject).to_not be_valid
     end
 
-    it 'likes_counter should be present' do
-      subject.likes_counter = nil
-      expect(subject).to_not be_valid
-    end
-
-    it 'likes_counter should not be string' do
-      subject.likes_counter = 'abc'
-      expect(subject).to_not be_valid
-    end
-
-    it 'likes_counter should not be negative' do
+    it 'should have a postive integer likes counter' do
       subject.likes_counter = -1
       expect(subject).to_not be_valid
     end
   end
 
-  describe '#recent comments' do
+  describe '#recent_comments' do
     subject { FactoryBot.create :post_with_comments, comments_counter: 5 }
 
-    it 'should return 5 comments' do
-      expect(subject.recent_comments.length).to be 5
+    it 'should return 5 posts' do
+      expect(subject.recent_comments.length).to be(5)
+    end
+  end
+
+  describe '#update_count' do
+    subject { FactoryBot.build :post }
+
+    it 'should update the users post count' do
+      subject.update_count(2)
+      expect(subject.user.posts_counter).to be(2)
     end
   end
 end
