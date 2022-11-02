@@ -26,7 +26,7 @@ class PostsController < ApplicationController
     @post = Post.find params[:id]
 
     if @post.update post_params
-      format.html { redirect_to user_post_path(@post.user.id, @post.id), notice: 'Post edited successfully!' }
+      redirect_to user_post_path(@post.user.id, @post.id), notice: 'Post edited successfully!'
     else
       render :new
     end
