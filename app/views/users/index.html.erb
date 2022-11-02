@@ -1,11 +1,10 @@
 <h1>Users</h1>
-
 <ul>
   <% @users.each do |user| %>
     <li>
       <%= link_to user_path(user.id) do %>
         <div class="card">
-          <%= image_tag ("#{user.photo}") %>
+          <%= image_tag ("#{user.photo}"), alt: "profile picture" %>
           <h2><%= user.name %></h2>
           <p>Number of posts: <%= user.posts_counter %></p>
         </div>

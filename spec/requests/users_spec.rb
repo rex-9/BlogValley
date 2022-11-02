@@ -13,7 +13,7 @@ RSpec.describe 'Users', type: :request do
     end
 
     it 'return correct placeholder text' do
-      expect(response.body).to include('Here is the list of users')
+      expect(response.body).to include('Users')
     end
   end
 
@@ -29,7 +29,7 @@ RSpec.describe 'Users', type: :request do
     end
 
     it 'return correct placeholder text' do
-      expect(response.body).to include('Here is the profile of a given user')
+      expect(response.body).to include('Show User Data')
     end
   end
 end

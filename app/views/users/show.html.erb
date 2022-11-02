@@ -1,7 +1,7 @@
 <div class="flex-center">
   <h1 class="mb-3">Show User Data</h1>
   <div class="card">
-    <%= image_tag ("#{@user.photo}") %>
+    <%= image_tag ("#{@user.photo}"), alt: "profile picture" %>
     <h2><%= @user.name %></h2>
     <p>Number of posts: <%= @user.posts_counter %></p>
   </div>
@@ -10,17 +10,19 @@
   <div>
     <h2>Posts:</h2>
     <ul>
-      <% @user.three_recent_posts.each do |post| %>
-        <li class='post-card'>
-          <h3><%= post.title %></h3>
-          <p><%= post.text %></p>
-          <div>
-            <span>Comments: <%= post.comments_counter %></span>
-            <span>Likes: <%= post.likes_counter %></span>
-          </div>
-        </li>
+      <% @user.recent_posts.each do |post| %>
+        <%= link_to user_post_path(user_id: @user.id, post_id: post.id) do %>
+          <li class='post-card'>
+            <h3><%= post.title %></h3>
+            <p><%= post.text %></p>
+            <div>
+              <span>Comments: <%= post.comments_counter %></span>
+              <span>Likes: <%= post.likes_counter %></span>
+            </div>
+          </li>
+        <% end %>
       <% end %>
     </ul>
   </div>
-  <%= link_to 'See more', user_posts_path(@user.id) , class:'btn'%>
+  <%= link_to 'See more', user_posts_path(@user.id), class:'btn'%>
 </div>

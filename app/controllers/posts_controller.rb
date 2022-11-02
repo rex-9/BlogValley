@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
-    @posts = @user.posts
+    @posts = @user.posts.includes(:comments)
   end
 
   def show
@@ -9,16 +9,14 @@ class PostsController < ApplicationController
   end
 
   def new
-    @user = User.find(params[:user_id])
-    @post = @user.posts.new
-    render :new, locals: { post: @post }
+    user = User.find(params[:user_id])
+    post = user.posts.new
+    render :new, locals: { post: }
   end
 
   def create
-    @user = User.find(params[:user_id])
-    add_post = @user.posts.new(post_params)
-    add_post.comments_counter = 0
-    add_post.likes_counter = 0
+    user = User.find(params[:user_id])
+    add_post = user.posts.new(post_params)
     respond_to do |format|
       format.html do
         if add_post.save

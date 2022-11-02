@@ -1,8 +1,8 @@
 <h1> Posts Show Page</h1>
-
 <div class='post-card'>
   <h3><%= @post.title %></h3>
   <p><%= @post.text %></p>
+  <p><%= @post.user.name %></p>
   <div>
     <span>Comments: <%= @post.comments_counter %></span>
     <span>Likes: <%= @post.likes_counter %></span>
@@ -13,11 +13,9 @@
     <% end %>
   </div>
 </div>
-
 <%= form_with url: "/users/#{@post.user_id}/posts/#{@post.id}/like_post" do |f| %>
   <%= f.submit "Like" %>
 <% end %>
-
 <h1 class="comment-here">Comment here....</h1>
 <%= form_with url: new_comment_user_post_path do |form| %>
   <div class="mb-3">
