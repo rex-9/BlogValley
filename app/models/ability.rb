@@ -10,7 +10,7 @@ class Ability
       can :read, :all
       can :create, [Comment, Post]
       can :update, [Comment, Post], user: user
-      can :destroy, [Comment, Post], user: user
+      can :destroy, [Comment, Post], user:
     end
   end
 end

@@ -36,7 +36,6 @@ begin
   end
 
   Capybara.javascript_driver = :selenium_chrome
-
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
