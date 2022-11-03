@@ -12,5 +12,5 @@
     <p><%= @post.text %></p>
   </div>
 </div>
-<%= render partial: "shared/new_comment", post: @post %>
+<%= render "shared/new_comment" %>
 <%= render partial: "shared/comment", collection: @comments %>
