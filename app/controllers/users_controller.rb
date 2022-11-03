@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
+  protect_from_forgery prepend: true
   def index
-    @users = User.all.order('created_at') # eager load the posts
+    @users = User.all.order('created_at')
   end
 
   def show
