@@ -12,29 +12,27 @@
   <header>
     <nav class="flex">
       <% if user_signed_in? %>
-        <%= link_to t('create_post'), new_post_path, class: "button is-primary is-pulled-left mt-2 ml-5" %>
+        <%= link_to "Create Post", new_post_path, class: "button is-primary is-pulled-left mt-2 ml-5" %>
         <div class="username">
           <%= current_user.name %>
         </div>
-        <%= button_to t('sign_out'), destroy_user_session_path, method: :delete, class: "button is-danger is-pulled-right mt-2 mr-5" %>
+        <%= button_to 'Sign Out', destroy_user_session_path, method: :delete, class: "button is-danger is-pulled-right mt-2 mr-5" %>
       <% end %>
     </nav>
   </header>
   <body>
-    <div class="section">
-      <div class="container">
-        <% if alert.present? %>
-          <div class="notification is-danger is-light">
-            <%= alert %>
-          </div>
-        <% end %>
-        <% if notice.present? %>
-          <div class="notification is-link is-light mt-2">
-            <%= notice %>
-          </div>
-        <% end %>
-        <%= yield %>
-      </div>
+    <div class="container">
+      <% if alert.present? %>
+        <div class="notification is-danger is-light">
+          <%= alert %>
+        </div>
+      <% end %>
+      <% if notice.present? %>
+        <div class="notification is-link is-light mt-2">
+          <%= notice %>
+        </div>
+      <% end %>
+      <%= yield %>
     </div>
   </body>
 </html>
