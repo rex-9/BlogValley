@@ -8,7 +8,8 @@ class User < ApplicationRecord
   has_many :likes
   has_many :comments
 
-  validates :name, uniqueness: { case_sensitive: false }, presence: true, allow_blank: false, format: { with: /\A[a-zA-Z0-9]+\z/ }
+  validates :name, uniqueness: { case_sensitive: false }, presence: true, allow_blank: false,
+                   format: { with: /\A[a-zA-Z0-9]+\z/ }
   validates :posts_counter, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   def recent_posts(limit = 3)
