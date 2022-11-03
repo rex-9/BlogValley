@@ -117,3 +117,15 @@ ul li {
     flex-grow: 1;
   }
 }
+
+.flex {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.username {
+  display: flex;
+  justify-content: center;
+}
