@@ -1,12 +1,16 @@
 class LikesController < ApplicationController
   def create
+    post = Post.find(params[:post_id])
+    like = post.likes.new(user: current_user)
+
+    flash[:alert] = 'You liked this post' unless like.save
+    redirect_to user_post_path(post.user.id, post.id)
+  end
+
+  def destroy
     post = Post.find(params[:id])
-    like = current_user.likes.create(post:)
-    if like.save!
-      flash[:success] = 'like added'
-    else
-      flash[:error] = 'like was not added'
-    end
-    redirect_to user_post_url
+
+    flash[:notice] = 'Failed to unlike post!' unless post.users.delete(current_user)
+    redirect_to user_post_path(post.user.id, post.id)
   end
 end

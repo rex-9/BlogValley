@@ -6,28 +6,13 @@ RSpec.describe User, type: :model do
 
     before { subject.save }
 
-    it 'name should be present' do
+    it 'return a name' do
       subject.name = nil
       expect(subject).to_not be_valid
     end
 
-    it 'name should not be too short' do
-      subject.name = 'a'
-      expect(subject).to_not be_valid
-    end
-
-    it 'name should not be too long' do
-      subject.name = 'a' * 51
-      expect(subject).to_not be_valid
-    end
-
-    it 'posts_counter should not be string' do
-      subject.posts_counter = 'abc'
-      expect(subject).to_not be_valid
-    end
-
-    it 'posts_counter should not be negative value' do
-      subject.posts_counter = -2
+    it 'should have posts > 0' do
+      subject.posts_counter = -1
       expect(subject).to_not be_valid
     end
   end

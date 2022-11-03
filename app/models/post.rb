@@ -2,8 +2,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :likes
   has_many :comments
-
-  after_save :update_posts_counter
+  has_many :users, through: :likes, counter_cache: :likes_counter
 
   validates :title, presence: true,
                     length: { in: 3...250, too_short: 'Title must not be shorter than 3 characters.',
@@ -12,15 +11,15 @@ class Post < ApplicationRecord
   validates :comments_counter, :likes_counter, presence: true,
                                                numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
-  after_save :update_posts_counter
-
   def recent_comments(limit = 5)
-    comments.limit(limit)
+    comments.last(limit)
   end
 
-  private
+  def liked?(user_id)
+    likes.where(user_id:).exists?
+  end
 
-  def update_posts_counter
-    user.increment!(:posts_counter)
+  def update_count(count)
+    user.update(posts_counter: count)
   end
 end

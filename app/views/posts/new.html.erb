@@ -1,14 +1,2 @@
-<h1>Create Post</h1>
-<%= form_with model: post, url: user_posts_path, method: :post, local: true, scope: :new_post do |form| %>
-  <div class="mb-3">
-    <%= form.label :title, "Subject" %>
-    <%= form.text_field :title %>
-  </div>
-  <div class="mb-3">
-    <%= form.label :text, "Comment" %>
-    <%= form.text_area :text %>
-  </div>
-  <div class="mb-3">
-    <%= form.submit class: "btn" %>
-  </div>
-<% end %>
+<h1 class="title is-4"><%= t('create_title') %></h1>
+<%= render 'shared/form' %>
