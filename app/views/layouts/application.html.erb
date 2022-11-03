@@ -10,10 +10,13 @@
     <%# <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <header>
-    <nav>
+    <nav class="flex">
       <% if user_signed_in? %>
-        <%= button_to t('sign_out'), destroy_user_session_path, method: :delete, class: "button is-danger is-pulled-right mt-2 mr-5" %>
         <%= link_to t('create_post'), new_post_path, class: "button is-primary is-pulled-left mt-2 ml-5" %>
+        <div class="username">
+          <%= current_user.name %>
+        </div>
+        <%= button_to t('sign_out'), destroy_user_session_path, method: :delete, class: "button is-danger is-pulled-right mt-2 mr-5" %>
       <% end %>
     </nav>
   </header>
