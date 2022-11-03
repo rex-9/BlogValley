@@ -46,7 +46,7 @@ gem 'ffi', github: 'ffi/ffi', submodules: true
 
 gem 'devise'
 
-gem 'cancan'
+gem 'cancancan'
 
 # Use Sass to process CSS
 gem 'sassc-rails'
