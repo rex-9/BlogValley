@@ -18,8 +18,9 @@ Rails.application.routes.draw do
   resources :likes, only: [:destroy]
 
   namespace :api, defaults: { format: :json } do
+    post '/auth/login', to: 'authentication#login'
     resources :posts, only: [:index] do
-      resources :comments, only: [:create, :index]
+      resources :comments, only: [:index, :create]
     end
   end
 end

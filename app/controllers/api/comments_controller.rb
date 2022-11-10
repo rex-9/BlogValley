@@ -1,5 +1,5 @@
 class Api::CommentsController < ApplicationController
-  load_and_authorize_resource
+  before_action :authorize_request
 
   def index
     @comments = Comment.where({ post_id: params[:post_id] }).order('created_at')
